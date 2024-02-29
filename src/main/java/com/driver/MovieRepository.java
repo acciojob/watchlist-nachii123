@@ -90,9 +90,10 @@ public class MovieRepository extends Movie{
         // your code here
         //clear all director from directorMap
         directorMap.clear();
+        movieMap.clear();
 
         //clear alll director from directorMovieMapping
         directorMovieMapping.clear();
     }
-
+      //
 }
