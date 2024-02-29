@@ -31,6 +31,8 @@ public class MovieRepository extends Movie{
         if(movieMap.containsKey(movie) && directorMap.containsKey(director)){
             // your code here
             // take list if moives present or not
+            movieMap.put(movie,movieMap.get(movie));
+            directorMap.put(director,directorMap.get(director));
            List<String> movies = directorMovieMapping.getOrDefault(director, new ArrayList<>());
            movies.add(movie);
            directorMovieMapping.put(director,movies);
@@ -61,10 +63,27 @@ public class MovieRepository extends Movie{
     public void deleteDirector(String director){
         // your code here
         //Remove director from directorMap
-        directorMap.remove(director);
+        if(directorMovieMapping.containsKey(director)){
+            List<String> movies = directorMovieMapping.get(director);
 
-        //Remove director from directorMovieMapping
-        directorMovieMapping.remove(director);
+            for(String movie: movies){
+                if(movieMap.containsKey(movie)){
+                    movieMap.remove(movie);
+                }
+
+            }
+
+
+
+            //Remove director from directorMovieMapping
+            directorMovieMapping.remove(director);
+
+        }
+        if(directorMap.containsKey(director)){
+            directorMap.remove(director);
+        }
+
+
     }
 
     public void deleteAllDirector(){
@@ -75,4 +94,5 @@ public class MovieRepository extends Movie{
         //clear alll director from directorMovieMapping
         directorMovieMapping.clear();
     }
+
 }
