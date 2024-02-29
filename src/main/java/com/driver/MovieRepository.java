@@ -86,14 +86,28 @@ public class MovieRepository extends Movie{
 
     }
 
-    public void deleteAllDirector(){
-        // your code here
-        //clear all director from directorMap
-        directorMap.clear();
-        movieMap.clear();
+//    public void deleteAllDirector(){
+//        // your code here
+//        //clear all director from directorMap
+//        directorMap.clear();
+//        movieMap.clear();
+//
+//        //clear alll director from directorMovieMapping
+//        directorMovieMapping.clear();
+//    }
+public void deleteAllDirector(){
+    HashSet<String> moviesSet = new HashSet<String>();
 
-        //clear alll director from directorMovieMapping
-        directorMovieMapping.clear();
+    for(String director: directorMovieMapping.keySet()){
+        for(String movie: directorMovieMapping.get(director)){
+            moviesSet.add(movie);
+        }
     }
+    for(String movie: moviesSet){
+        if(movieMap.containsKey(movie)){
+            movieMap.remove(movie);
+        }
+    }
+}
       //
 }
